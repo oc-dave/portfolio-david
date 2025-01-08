@@ -11,7 +11,35 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 2000);
       });
   }
-
+// Add this to your script.js file or in a script tag
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const formResponse = document.getElementById('form-response');
+  formResponse.textContent = 'Sending message...';
+  
+  try {
+      const formData = new FormData(this);
+      
+      const response = await fetch('https://getform.io/f/apjjkova', {
+          method: 'POST',
+          body: formData,
+          headers: {
+              'Accept': 'application/json'
+          }
+      });
+      
+      if (response.ok) {
+          formResponse.textContent = 'Message sent successfully!';
+          this.reset(); // Clear the form
+      } else {
+          throw new Error('Form submission failed');
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      formResponse.textContent = 'Failed to send message. Please try again.';
+  }
+});
   // Updated mobile menu functionality
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav-links');
@@ -101,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add scroll event listener with passive option for better performance
   window.addEventListener('scroll', handleScroll, { passive: true });
 });
+
 document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav-links');
@@ -150,3 +179,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Keep your existing scroll handling code below
+// Add this to your script.js file or in a script tag
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formResponse = document.getElementById('form-response');
+    formResponse.textContent = 'Sending message...';
+    
+    try {
+        const formData = new FormData(this);
+        
+        const response = await fetch('https://getform.io/f/apjjkova', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            formResponse.textContent = 'Message sent successfully!';
+            this.reset(); // Clear the form
+        } else {
+            throw new Error('Form submission failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        formResponse.textContent = 'Failed to send message. Please try again.';
+    }
+});
